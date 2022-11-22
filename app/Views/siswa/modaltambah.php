@@ -13,25 +13,34 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2 form-label">No.Bp</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="nobp" name="noBp">
+                        <input type="text" class="form-control" id="nobp" name="nobp">
+                        <div class="invalid-feedback errorNobp">
+
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-2 form-label">Nama Siswa</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" id="nama" name="nama">
+                        <div class="invalid-feedback errorNama">
+
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-2 form-label">Tempat Lahir</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="tempat" name="tempat">
+                        <div class="invalid-feedback errorTempat">
+
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-2 form-label">Tgl. Lahir</label>
                     <div class="col-sm-5">
-                        <input type="date" class="form-control" id="tgl" name="tgl">
+                        <input type="date" class="form-control" id="tgllahir" name="tgllahir">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -72,7 +81,40 @@ $(document).ready(function() {
                 $('.btnsimpan').html('Simpan');
             },
             success: function(response) {
+                if (response.error) {
+                    if (response.error.nobp) {
+                        $('#nobp').addClass('is-invalid');
+                        $('.errorNobp').html(response.error.nobp);
+                    } else {
+                        $('#nobp').removeClass('is-invalid');
+                        $('.errorNobp').html('');
+                    }
 
+                    if (response.error.nama) {
+                        $('#nama').addClass('is-invalid');
+                        $('.errorNama').html(response.error.nama);
+                    } else {
+                        $('#nama').removeClass('is-invalid');
+                        $('.errorNama').html('');
+                    }
+
+                    if (response.error.tempat) {
+                        $('#tempat').addClass('is-invalid');
+                        $('.errorTempat').html(response.error.tempat);
+                    } else {
+                        $('#tempat').removeClass('is-invalid');
+                        $('.errorTempat').html('');
+                    }
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: response.sukses
+                    })
+
+                    $('#modaltambah').modal('hide');
+                    dataSiswa();
+                }
             },
             error: function(xhr, ajaxOption, thrownError) {
                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);

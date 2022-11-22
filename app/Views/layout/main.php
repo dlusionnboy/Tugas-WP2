@@ -17,6 +17,12 @@
     <link href="<?= base_url() ?>/assets/css/style.css" rel="stylesheet" type="text/css">
 
     <script src="<?= base_url() ?>/assets/js/jquery.min.js"></script>
+
+    <!-- sweetalert2 -->
+    <script src="<?= base_url() ?>/assets/plugins/node_modules/sweetalert2/dist/sweetalert2.min.css"></script>
+    <script src="<?= base_url() ?>/assets/plugins/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
+
 </head>
 
 
